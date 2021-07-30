@@ -90,6 +90,41 @@ class UserSeeder extends Seeder
             return $data;
         }
 
+        $user = User::create([
+          'first_name' =>env('CHILD_1_FIRST_NAME'),
+          'last_name' => env('CHILD_1_LAST_NAME'),
+          'account_id' => 1,
+          'email' => env('CHILD_1_EMAIL'),
+          'email_verified_at' => new DateTime(),
+          'password' => bcrypt(env('CHILD_1_PASSWORD')),
+          'options' => json_encode([
+            'type' => 'addition',
+            'width' => 5,
+            'height' => 8,
+            'trial_time' => 300,
+            'row_digits' => 2,
+            'header_digits' => 1,
+            ]),
+        ]);
+
+        $user = User::create([
+          'first_name' =>env('CHILD_2_FIRST_NAME'),
+          'last_name' => env('CHILD_2_LAST_NAME'),
+          'account_id' => 1,
+          'email' => env('CHILD_2_EMAIL'),
+          'email_verified_at' => new DateTime(),
+          'password' => bcrypt(env('CHILD_2_PASSWORD')),
+          'options' => json_encode([
+            'type' => 'addition',
+            'width' => 5,
+            'height' => 8,
+            'trial_time' => 300,
+            'row_digits' => 2,
+            'header_digits' => 1,
+            ]),
+        ]);
+
+
         // make_trial(mod($trial_data, 300, 15, 8));
         // make_trial(mod($trial_data, 293, 14, 8));
         // make_trial(mod($trial_data, 289, 17, 7));
