@@ -91,6 +91,23 @@ class UserSeeder extends Seeder
         }
 
         $user = User::create([
+          'first_name' =>env('PARENT0_FIRST_NAME'),
+          'last_name' => env('PARENT0_LAST_NAME'),
+          'account_id' => 1,
+          'email' => env('PARENT0_EMAIL'),
+          'email_verified_at' => new DateTime(),
+          'password' => bcrypt(env('PARENT0_PASSWORD')),
+          'options' => json_encode([
+            'type' => 'addition',
+            'width' => 5,
+            'height' => 8,
+            'trial_time' => 300,
+            'row_digits' => 2,
+            'header_digits' => 1,
+            ]),
+        ]);
+
+        $user = User::create([
           'first_name' =>env('CHILD_1_FIRST_NAME'),
           'last_name' => env('CHILD_1_LAST_NAME'),
           'account_id' => 1,
@@ -123,6 +140,31 @@ class UserSeeder extends Seeder
             'header_digits' => 1,
             ]),
         ]);
+
+        $user = User::create([
+          'first_name' =>env('PARENT1_FIRST_NAME'),
+          'last_name' => env('PARENT1_LAST_NAME'),
+          'email' => env('PARENT1_EMAIL'),
+          'email_verified_at' => new DateTime(),
+          'password' => bcrypt(env('PARENT1_PASSWORD')),
+          'options' => json_encode([
+            'type' => 'addition',
+            'width' => 5,
+            'height' => 8,
+            'trial_time' => 300,
+            'row_digits' => 2,
+            'header_digits' => 1,
+            ]),
+        ]);
+
+        $account = Account::create([
+          'user_id' => $user->id,
+          'notification_email'=> env('PARENT1_EMAIL'),
+        ]);
+
+        $user->update(['account_id' => $account->id]);
+
+
 
 
         // make_trial(mod($trial_data, 300, 15, 8));
